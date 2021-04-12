@@ -9,6 +9,7 @@ const AddMovie = ({ setMovies, lastId, setShowAdd }) => {
     year: 2020,
     imageUrl: '',
     rating: 0,
+    peopleRated: 0,
   };
   const [movie, setMovie] = useState(initialState);
 

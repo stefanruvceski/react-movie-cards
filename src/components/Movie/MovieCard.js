@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import StarRating from '../StarRating';
 
 const MovieCard = ({ movie, setMovies, movies }) => {
+  const [hover, setHover] = useState(false);
   const handleDelete = id => {
     const filtered = movies.filter(m => m.id !== movie.id);
     setMovies(filtered);
+  };
+
+  const handleMouseOver = () => {
+    alert(movie.peopleRated);
   };
   return (
     <div className="movie-card">
@@ -21,10 +26,24 @@ const MovieCard = ({ movie, setMovies, movies }) => {
         </div>
         <div className="card-footer">
           <div className="clearfix">
-            <div className="float-left mt-1">
-              <StarRating rating={movie.rating} />
+            <div className="float-left mt-1 mb-3">
+              <StarRating
+                rating={movie.rating}
+                id={movie.id}
+                movies={movies}
+                setMovies={setMovies}
+                peopleRated={movie.peopleRated}
+              />
             </div>
-            <div className="card-footer-badge float-right badge badge-primary badge-pill">{movie.rating}</div>
+
+            <div
+              className="card-footer-badge float-right badge badge-primary badge-pill"
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            >
+              {Math.round((movie.rating + Number.EPSILON) * 100) / 100}
+            </div>
+
             <div className="float-right">
               <button type="button" className="btn btn-danger btn-sm mr-1" onClick={() => handleDelete(movie.id)}>
                 Delete
@@ -33,6 +52,8 @@ const MovieCard = ({ movie, setMovies, movies }) => {
           </div>
         </div>
       </div>
+      {hover && <h5 className="bold float-right mt-1 mb-2">People rated:{movie.peopleRated}</h5>}
+      {!hover && <h5 className="float-right mt-1 mb-3"></h5>}
     </div>
   );
 };
