@@ -25,7 +25,7 @@ const Movies = () => {
           </button>
           {showAdd && <AddMovie setMovies={setMovies} lastId={getLastId()} setShowAdd={setShowAdd} />}
           <hr />
-          <MovieList movies={movies} />
+          <MovieList movies={movies} setMovies={setMovies} />
         </div>
       </div>
     </div>
