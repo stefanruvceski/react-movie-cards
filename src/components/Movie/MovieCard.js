@@ -4,7 +4,6 @@ import { useGlobalContext } from '../../contextAPI/context';
 import StarRating from '../StarRating';
 
 const MovieCard = ({ movie }) => {
-  console.log(movie);
   const { deleteMovie } = useGlobalContext();
   const [hover, setHover] = useState(false);
 
