@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { useGlobalContext } from '../../contextAPI/context';
 import StarRating from '../StarRating';
 
-const MovieCard = ({ movie, setMovies, movies }) => {
+const MovieCard = ({ movie }) => {
+  console.log(movie);
+  const { deleteMovie } = useGlobalContext();
   const [hover, setHover] = useState(false);
+
   const handleDelete = id => {
-    const filtered = movies.filter(m => m.id !== movie.id);
-    setMovies(filtered);
+    deleteMovie(id);
   };
 
-  const handleMouseOver = () => {
-    alert(movie.peopleRated);
-  };
   return (
     <div className="movie-card">
       <div className="movie-card card">
@@ -27,13 +26,7 @@ const MovieCard = ({ movie, setMovies, movies }) => {
         <div className="card-footer">
           <div className="clearfix">
             <div className="float-left mt-1 mb-3">
-              <StarRating
-                rating={movie.rating}
-                id={movie.id}
-                movies={movies}
-                setMovies={setMovies}
-                peopleRated={movie.peopleRated}
-              />
+              <StarRating rating={movie.rating} id={movie.id} />
             </div>
 
             <div

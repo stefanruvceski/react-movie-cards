@@ -2,5 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import './styles/app.css';
-
-ReactDOM.render(<App />, document.getElementById('app'));
+import { AppProvider } from './contextAPI/context';
+ReactDOM.render(
+  <AppProvider>
+    <App />
+  </AppProvider>,
+  document.getElementById('app')
+);

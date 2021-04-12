@@ -1,17 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
+import { useGlobalContext } from '../../contextAPI/context';
 import MovieCard from './MovieCard';
 
-const getMovies = (movies, setMovies) => (
+const getMovies = movies => (
   <div className="card-deck">
     {movies.map(movie => (
-      <MovieCard movies={movies} setMovies={setMovies} key={movie.id} movie={movie} />
+      <MovieCard key={movie.id} movie={movie} />
     ))}
   </div>
 );
 
-const MovieList = ({ movies, setMovies }) => {
+const MovieList = () => {
+  const {
+    state: { movies },
+  } = useGlobalContext();
   if (movies.length === 0) {
     return (
       <div className="text-center">
@@ -19,16 +21,8 @@ const MovieList = ({ movies, setMovies }) => {
       </div>
     );
   } else {
-    return <div>{getMovies(movies, setMovies)}</div>;
+    return <div>{getMovies(movies)}</div>;
   }
-};
-
-MovieList.defaultProps = {
-  movies: [],
-};
-
-MovieList.propTypes = {
-  movies: PropTypes.array,
 };
 
 export default MovieList;
